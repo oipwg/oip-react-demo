@@ -22,10 +22,10 @@ module.exports = {
     rules: [
       {
         test: /.js?$/,
-        loader: 'babel-loader',
-        exclude: /node_modules/,
+        loader: require.resolve('babel-loader'),
         query: {
-          presets: ['env', 'react']
+          presets: ['@babel/env', '@babel/react'],
+          cacheDirectory: true
         }
       },
       {
