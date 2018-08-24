@@ -70,23 +70,35 @@ class Homepage extends Component {
 				
 				<div className="row">
 					<div className="card" style={{width: "100%", padding: "20px"}}>
-						<div className="col-12 col-sm-6 col-md-8 col-lg-9">
-							<h5 className="card-title">{title}</h5>
-							<div className="card-subtitle">
-								{artifact_description}
+						<div className="row">
+							<div className="col-12 col-sm-6 col-md-8 col-lg-9">
+								<h5 className="card-title">{title}</h5>
+								<div className="card-subtitle">
+									{artifact_description}
+								</div>
 							</div>
-						</div>
-						<div className="col-12 col-sm-6 col-md-4 col-lg-3">
-						{
-							paid_file_state ?
-								
-							<div>
-								<PaymentButton type="view" Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} fileState={paid_file_state} />
-								<PaymentButton type="buy" Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} fileState={paid_file_state} />
-							</div>
+							<div className="col-12 col-sm-6 col-md-4 col-lg-3">
+							{
+								paid_file_state ?
+									
+								<table border="0" style={{textAlign: "center", color: "#28a745"}}>
+									<tr>
+										<th>Watch Now</th>
+										<th>Purchase</th>
+									</tr>
+									<tr>
+										<td>
+											<PaymentButton type="view" Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} fileState={paid_file_state} />
+										</td>
+										<td>
+											<PaymentButton type="buy" Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} fileState={paid_file_state} />
+										</td>
+									</tr>
+								</table>
 
-							: null
-						}
+								: null
+							}
+							</div>
 						</div>
 					</div>
 				</div>
