@@ -26,7 +26,7 @@ class Homepage extends Component {
 		this.fetchArtifact()
 	}
 	render(){
-		let posterFile, title = "loading...", artifact_description, paid_file_uid, paid_file_state
+		let posterFile, title = "loading...", artifact_description, paid_file_uid, paid_file_state, lockVideo = false
 
 		if (this.props.ActiveArtifact){
 			posterFile = this.props.ActiveArtifact.getThumbnail()
@@ -38,7 +38,8 @@ class Homepage extends Component {
 			if (this.props.ActiveArtifactFiles[paid_file_uid]){
 				paid_file_state = this.props.ActiveArtifactFiles[paid_file_uid]
 				
-				console.log(this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile.getSuggestedPlayCost())
+				if (paid_file_state.isPaid && !paid_file_state.owned && !paid_file_state.hasPaid)
+					lockVideo = true
 			}
 		}
 		
@@ -58,7 +59,7 @@ class Homepage extends Component {
 
 				<div className="row">
 					<div className="col-12 col-md-8 col-lg-9">
-						<VideoPlayer Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFile.ArtifactFile} />
+						<VideoPlayer Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFile.ArtifactFile} lockFile={lockVideo} usePosterFile={false} />
 					</div>
 					<div className="col-md-4 col-lg-3 d-none d-md-block">
 						<ImageViewer Artifact={this.props.ActiveArtifact} ArtifactFile={posterFile} />
