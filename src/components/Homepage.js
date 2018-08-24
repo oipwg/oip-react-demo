@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // Import the Bootstrap 4 CSS
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import { AccountButton, LoginModal, VideoPlayer, ImageViewer, PaymentButton } from 'oip-react'
+import { AccountButton, LoginModal, VideoPlayer, ImageViewer, PaymentButton, CoinbaseWrapper } from 'oip-react'
 
 import { loadActiveArtifact } from 'oip-state/src/actions/ActiveArtifact/thunks'
 import { setActiveFile } from 'oip-state/src/actions/ActiveArtifactFiles/thunks'
@@ -44,8 +44,9 @@ class Homepage extends Component {
 		
 		return(
 			<div className="container" style={{paddingTop: "20px"}}>
-				{/* Login/Register Popup */}
+				{/* Add the Modals, they handle showing and hiding of themselves */}
 				<LoginModal />
+				<CoinbaseWrapper />
 
 				<div className="row justify-content-end">
 					<AccountButton className="float-right" style={{marginRight: "20px"}} />
