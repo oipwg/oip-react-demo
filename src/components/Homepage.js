@@ -20,8 +20,9 @@ class Homepage extends Component {
 	fetchArtifact(){
 		// CA: 21252c
 		// Agent: fca1d6
-		this.props.loadActiveArtifact("fca1d6", (artifact) => {
-			// this.props.setActiveFile(artifact, artifact.getFiles()[1])
+		// Sintel: d48f83
+		this.props.loadActiveArtifact("d48f83", (artifact) => {
+			this.props.setActiveFile(artifact, artifact.getFiles()[1])
 			this.fileSet = true
 		})
 	}
