@@ -13,6 +13,8 @@ class Homepage extends Component {
 	constructor(props){
 		super(props)
 
+		this.fileSet = false
+
 		this.fetchArtifact = this.fetchArtifact.bind(this);
 	}
 	fetchArtifact(){
@@ -20,6 +22,7 @@ class Homepage extends Component {
 		// Agent: fca1d6
 		this.props.loadActiveArtifact("fca1d6", (artifact) => {
 			// this.props.setActiveFile(artifact, artifact.getFiles()[1])
+			this.fileSet = true
 		})
 	}
 	componentDidMount(){
@@ -37,8 +40,10 @@ class Homepage extends Component {
 
 			if (this.props.ActiveArtifactFiles[paid_file_uid]){
 				paid_file_state = this.props.ActiveArtifactFiles[paid_file_uid]
-				
-				if (paid_file_state.isPaid && !paid_file_state.owned && !paid_file_state.hasPaid)
+			}
+
+			if (this.props.ActiveArtifactFile && this.fileSet){
+				if (this.props.ActiveArtifactFile.isPaid && !this.props.ActiveArtifactFile.owned && !this.props.ActiveArtifactFile.hasPaid)
 					lockVideo = true
 			}
 		}
