@@ -87,20 +87,10 @@ class Homepage extends Component {
 							{
 								paid_file_state ?
 									
-								<table border="0" style={{textAlign: "center", color: "#28a745"}}>
-									<tr>
-										<th>Watch Now</th>
-										<th>Purchase</th>
-									</tr>
-									<tr>
-										<td>
-											<PaymentButton type="view" Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} fileState={paid_file_state} />
-										</td>
-										<td>
-											<PaymentButton type="buy" Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} fileState={paid_file_state} />
-										</td>
-									</tr>
-								</table>
+								<div>
+									<PaymentButton type="view" Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} fileState={paid_file_state} />
+									<PaymentButton type="buy" Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} fileState={paid_file_state} />
+								</div>
 
 								: null
 							}
