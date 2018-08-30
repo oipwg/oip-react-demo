@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { AccountButton, LoginModal, VideoPlayer, ImageViewer, PaymentButton, CoinbaseWrapper } from 'oip-react'
 
 import { loadActiveArtifact } from 'oip-state/src/actions/ActiveArtifact/thunks'
-import { setActiveFile } from 'oip-state/src/actions/ActiveArtifactFiles/thunks'
+import { setActiveFile, fileToUID } from 'oip-state/src/actions/ActiveArtifactFiles/thunks'
 
 class Homepage extends Component {
 	constructor(props){
@@ -22,7 +22,7 @@ class Homepage extends Component {
 		// Agent: fca1d6
 		// Sintel: d48f83
 		this.props.loadActiveArtifact("d48f83", (artifact) => {
-			this.props.setActiveFile(artifact, artifact.getFiles()[1])
+			this.props.setActiveFile(artifact.getFiles()[1])
 			this.fileSet = true
 		})
 	}
@@ -37,11 +37,7 @@ class Homepage extends Component {
 			title = this.props.ActiveArtifact.getTitle()
 			artifact_description = this.props.ActiveArtifact.getDescription()
 
-			paid_file_uid = this.props.ActiveArtifact.getTXID() + "|" + 0
-
-			if (this.props.ActiveArtifactFiles[paid_file_uid]){
-				paid_file_state = this.props.ActiveArtifactFiles[paid_file_uid]
-			}
+			paid_file_uid = fileToUID(this.props.ActiveArtifact.getFiles()[0])
 
 			if (this.props.ActiveArtifactFile && this.fileSet){
 				if (this.props.ActiveArtifactFile.isPaid && !this.props.ActiveArtifactFile.owned && !this.props.ActiveArtifactFile.hasPaid)
@@ -88,8 +84,8 @@ class Homepage extends Component {
 								paid_file_state ?
 									
 								<div>
-									<PaymentButton type="view" Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} fileState={paid_file_state} />
-									<PaymentButton type="buy" Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} fileState={paid_file_state} />
+									<PaymentButton type="view" ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} />
+									<PaymentButton type="buy" ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} />
 								</div>
 
 								: null
