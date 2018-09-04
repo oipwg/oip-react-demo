@@ -81,7 +81,7 @@ class Homepage extends Component {
 							</div>
 							<div className="col-12 col-sm-6 col-md-4 col-lg-3">
 							{
-								paid_file_state ?
+								this.props.ActiveArtifactFiles[paid_file_uid] ?
 									
 								<div>
 									<PaymentButton type="view" ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} />
