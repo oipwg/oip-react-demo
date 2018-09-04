@@ -28,7 +28,8 @@
     "react-blur": "^0.6.0",
     "react-bootstrap": "^0.32.1",
     "react-date-picker": "^6.10.1",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-linkify": "^0.2.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0-rc.1",

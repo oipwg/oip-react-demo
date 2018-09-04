@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
+import Linkify from 'react-linkify'
+
 // Import the Bootstrap 4 CSS
 import 'bootstrap/dist/css/bootstrap.min.css'
 
@@ -36,6 +38,18 @@ class Homepage extends Component {
 			posterFile = this.props.ActiveArtifact.getThumbnail()
 			title = this.props.ActiveArtifact.getTitle()
 			artifact_description = this.props.ActiveArtifact.getDescription()
+
+
+			// ------------------------------------------
+			// ------------------------------------------
+			// This is to fix the Unicode broken publishes, only temporary code.
+			try {
+				let fixed_desc = JSON.parse(artifact_description)
+				artifact_description = fixed_desc
+			} catch (e) { }
+			// ------------------------------------------
+			// ------------------------------------------
+
 
 			paid_file_uid = fileToUID(this.props.ActiveArtifact.getFiles()[0])
 
@@ -75,8 +89,8 @@ class Homepage extends Component {
 						<div className="row">
 							<div className="col-12 col-sm-6 col-md-8 col-lg-9">
 								<h5 className="card-title">{title}</h5>
-								<div className="card-subtitle">
-									{artifact_description}
+								<div className="card-subtitle" style={{whiteSpace: "pre-wrap"}}>
+									<Linkify>{artifact_description}</Linkify>
 								</div>
 							</div>
 							<div className="col-12 col-sm-6 col-md-4 col-lg-3">
