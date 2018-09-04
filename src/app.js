@@ -6,12 +6,12 @@ import ReactDOM from 'react-dom';
 
 // Import stuff for Redux
 import { Provider } from 'react-redux'
-import state from 'oip-state'
+import { createStore } from 'oip-state'
 
 // Import the App
 import Homepage from './components/Homepage'
 
-const store = state.createStore()
+const store = createStore()
 
 class App extends Component {
 	render(){
