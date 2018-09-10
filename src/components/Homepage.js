@@ -1,109 +1,61 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 
 import Linkify from 'react-linkify'
 
-// Import the Bootstrap 4 CSS
-import 'bootstrap/dist/css/bootstrap.min.css'
-
-import { AccountButton, LoginModal, VideoPlayer, ImageViewer, PaymentButton, CoinbaseWrapper } from 'oip-react'
+import oipreact from 'oip-react'
+import { AccountButton, LoginModal, AudioViewer, FilePlaylist, CoinbaseWrapper, ArtifactTitle, ArtifactArtist } from 'oip-react'
 
 import { loadActiveArtifact } from 'oip-state/src/actions/ActiveArtifact/thunks'
 import { setActiveFile, fileToUID } from 'oip-state/src/actions/ActiveArtifactFiles/thunks'
 
-class Homepage extends Component {
-	constructor(props){
-		super(props)
+import album from '../assets/img/album.png'
+import movie from '../assets/img/movie.png'
 
-		this.fileSet = false
-
-		this.fetchArtifact = this.fetchArtifact.bind(this);
-	}
-	fetchArtifact(){
-		// CA: 21252c
-		// Agent: fca1d6
-		// Sintel: d48f83
-		this.props.loadActiveArtifact("d48f83", (artifact) => {
-			this.props.setActiveFile(artifact.getFiles()[1])
-			this.fileSet = true
-		})
-	}
-	componentDidMount(){
-		this.fetchArtifact()
-	}
+class Homepage extends React.Component {
 	render(){
-		let posterFile, title = "loading...", artifact_description, paid_file_uid, paid_file_state, lockVideo = false
-
-		if (this.props.ActiveArtifact){
-			posterFile = this.props.ActiveArtifact.getThumbnail()
-			title = this.props.ActiveArtifact.getTitle()
-			artifact_description = this.props.ActiveArtifact.getDescription()
-
-
-			// ------------------------------------------
-			// ------------------------------------------
-			// This is to fix the Unicode broken publishes, only temporary code.
-			try {
-				let fixed_desc = JSON.parse(artifact_description)
-				artifact_description = fixed_desc
-			} catch (e) { }
-			// ------------------------------------------
-			// ------------------------------------------
-
-
-			paid_file_uid = fileToUID(this.props.ActiveArtifact.getFiles()[0])
-
-			if (this.props.ActiveArtifactFile && this.fileSet){
-				if (this.props.ActiveArtifactFile.isPaid && !this.props.ActiveArtifactFile.owned && !this.props.ActiveArtifactFile.hasPaid)
-					lockVideo = true
-			}
-		}
-		
 		return(
-			<div className="container" style={{paddingTop: "20px"}}>
-				{/* Add the Modals, they handle showing and hiding of themselves */}
-				<LoginModal />
-				<CoinbaseWrapper />
-
-				<div className="row justify-content-end">
-					<AccountButton className="float-right" style={{marginRight: "20px"}} />
-				</div>
-
-				<div className="row">
-					<h1 className="mx-auto">{title}</h1>
-				</div>
-
-				<div className="row">
-					<div className="col-12 col-md-8 col-lg-9">
-						<VideoPlayer Artifact={this.props.ActiveArtifact} ArtifactFile={this.props.ActiveArtifactFile.ArtifactFile} lockFile={lockVideo} usePosterFile={false} />
+			<div>
+				<section class="jumbotron text-center">
+					<div class="container">
+						<h1 class="jumbotron-heading">The Open Index Protocol</h1>
+						<p class="lead text-muted">A revolutionary way to share, and get paid for sharing content</p>
+						<p>
+							<a href="https://oip.wiki" className="btn btn-outline-primary mx-1">More Info</a>
+						</p>
 					</div>
-					<div className="col-md-4 col-lg-3 d-none d-md-block">
-						<ImageViewer Artifact={this.props.ActiveArtifact} ArtifactFile={posterFile} />
-					</div>
-				</div>
-
-				<br />
-				
-				<div className="row">
-					<div className="card" style={{width: "100%", padding: "20px"}}>
-						<div className="row">
-							<div className="col-12 col-sm-6 col-md-8 col-lg-9">
-								<h5 className="card-title">{title}</h5>
-								<div className="card-subtitle" style={{whiteSpace: "pre-wrap"}}>
-									<Linkify>{artifact_description}</Linkify>
+				</section>
+				<div>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="card">
+									<div class="card-header text-center">
+										Album
+									</div>
+									<img class="card-img-top" src={album} />
+									<div class="card-body">
+										<p class="card-text text-center">Play Music, and test out purchasing Songs!</p>
+										<div class="d-flex justify-content-center align-items-center">
+											<Link to="/album" class="btn btn-outline-primary">View Demo</Link>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div className="col-12 col-sm-6 col-md-4 col-lg-3">
-							{
-								this.props.ActiveArtifactFiles[paid_file_uid] ?
-									
-								<div>
-									<PaymentButton type="view" ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} />
-									<PaymentButton type="buy" ArtifactFile={this.props.ActiveArtifactFiles[paid_file_uid].ArtifactFile} />
+							<div class="col-md-6">
+								<div class="card">
+									<div class="card-header text-center">
+										Movie
+									</div>
+									<img class="card-img-top" src={movie} />
+									<div class="card-body">
+										<p class="card-text text-center">Pay to play/purchase a full length Movie, watch the trailer for free!</p>
+										<div class="d-flex justify-content-center align-items-center">
+											<Link to="/movie" class="btn btn-outline-primary">View Demo</Link>
+										</div>
+									</div>
 								</div>
-
-								: null
-							}
 							</div>
 						</div>
 					</div>
@@ -113,17 +65,5 @@ class Homepage extends Component {
 	}
 }
 
-const mapDispatchToProps = {
-    loadActiveArtifact,
-    setActiveFile
-};
+export default Homepage
 
-function mapStateToProps(state) {
-	return {
-        ActiveArtifact: state.ActiveArtifact.Artifact,
-        ActiveArtifactFiles: state.ActiveArtifactFiles,
-        ActiveArtifactFile: state.ActiveArtifactFiles.active ? state.ActiveArtifactFiles[state.ActiveArtifactFiles.active] : {ArtifactFile: undefined}
-	}
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Homepage);

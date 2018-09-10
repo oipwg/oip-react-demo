@@ -25,12 +25,17 @@ module.exports = {
         loader: require.resolve('babel-loader'),
         query: {
           presets: ['@babel/env', '@babel/react'],
+          plugins: ["@babel/plugin-proposal-class-properties"],
           cacheDirectory: true
         }
       },
       {
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader' ]
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|jpg|gif|ttf|woff|woff2|eot|svg)$/,
