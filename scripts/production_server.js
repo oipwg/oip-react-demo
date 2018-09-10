@@ -8,4 +8,4 @@ app.use('/src', express.static('src'))
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, 'dist/index.html')))
 
-app.listen(3000, () => console.log('ETDB listening on port 3000!'))
+app.listen(9156, () => console.log('OIP React Demo listening on port 9156!'))
