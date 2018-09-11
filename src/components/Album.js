@@ -3,11 +3,8 @@ import { connect } from 'react-redux';
 
 import Linkify from 'react-linkify'
 
-import oipreact from 'oip-react'
 import { AccountButton, LoginModal, AudioViewer, FilePlaylist, CoinbaseWrapper, ArtifactTitle, ArtifactArtist } from 'oip-react'
-
-import { loadActiveArtifact } from 'oip-state/src/actions/ActiveArtifact/thunks'
-import { setActiveFile, fileToUID } from 'oip-state/src/actions/ActiveArtifactFiles/thunks'
+import { loadActiveArtifact, setActiveFile, fileToUID } from 'oip-state'
 
 class Album extends React.Component {
 	constructor(props){

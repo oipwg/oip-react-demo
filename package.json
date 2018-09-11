@@ -22,8 +22,8 @@
   "dependencies": {
     "bootstrap": "^4.1.3",
     "core-js": "^2.5.7",
-    "oip-react": "git+https://github.com/oipwg/oip-react.git",
-    "oip-state": "git+https://github.com/oipwg/oip-state.git",
+    "oip-react": "^1.5.4",
+    "oip-state": "^1.4.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-date-picker": "^6.10.1",

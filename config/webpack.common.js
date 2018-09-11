@@ -23,9 +23,9 @@ module.exports = {
       {
         test: /.js?$/,
         loader: require.resolve('babel-loader'),
+        exclude: /node_modules/,
         query: {
           presets: ['@babel/env', '@babel/react'],
-          plugins: ["@babel/plugin-proposal-class-properties"],
           cacheDirectory: true
         }
       },

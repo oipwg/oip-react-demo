@@ -5,8 +5,7 @@ import Linkify from 'react-linkify'
 
 import { AccountButton, LoginModal, FilePaymentWrapper, PosterWrapper, PaymentButton, CoinbaseWrapper, ArtifactTitle, ArtifactDescription } from 'oip-react'
 
-import { loadActiveArtifact } from 'oip-state/src/actions/ActiveArtifact/thunks'
-import { setActiveFile, fileToUID } from 'oip-state/src/actions/ActiveArtifactFiles/thunks'
+import { loadActiveArtifact, setActiveFile, fileToUID } from 'oip-state'
 
 class Movie extends Component {
 	constructor(props){

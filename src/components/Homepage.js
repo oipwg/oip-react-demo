@@ -1,14 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'
-
-import Linkify from 'react-linkify'
-
-import oipreact from 'oip-react'
-import { AccountButton, LoginModal, AudioViewer, FilePlaylist, CoinbaseWrapper, ArtifactTitle, ArtifactArtist } from 'oip-react'
-
-import { loadActiveArtifact } from 'oip-state/src/actions/ActiveArtifact/thunks'
-import { setActiveFile, fileToUID } from 'oip-state/src/actions/ActiveArtifactFiles/thunks'
 
 import album from '../assets/img/album.png'
 import movie from '../assets/img/movie.png'
