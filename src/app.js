@@ -37,7 +37,7 @@ class App extends Component {
 					<Route exact path="/" component={Homepage} />
 					<Route path="/movie" render={() => <ProviderWrapper component={Movie} id="d48f83" />} />
 					<Route path="/free-movie" render={() => <ProviderWrapper component={Movie} id="fca1d6" />} />
-					<Route path="/album" render={() => <ProviderWrapper component={Album} id="b4e6c9" />} />
+					<Route path="/album" render={() => <ProviderWrapper component={Album} />} />
 					<Route path="/free-album" render={() => <ProviderWrapper component={Album} id="061951" />} />
 				</div>
 			</BrowserRouter>

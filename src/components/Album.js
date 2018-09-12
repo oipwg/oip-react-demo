@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 
 import Linkify from 'react-linkify'
 
-import { AccountButton, LoginModal, AudioViewer, FilePlaylist, CoinbaseWrapper, ArtifactTitle, ArtifactArtist } from 'oip-react'
-import { loadActiveArtifact, setActiveFile, fileToUID } from 'oip-state'
+import { AccountButton, LoginModal, FilePaymentWrapper, FilePlaylist, CoinbaseWrapper, ArtifactTitle, ArtifactArtist } from 'oip-react'
+import { setActiveArtifact, loadActiveArtifact } from 'oip-state'
+
+import { TheBiddyBums } from '../assets/test_artifacts.js'
 
 class Album extends React.Component {
 	constructor(props){
@@ -18,14 +20,18 @@ class Album extends React.Component {
 		// Cor Metallicum: 061951
 		// Biddy Bums: b4e6c9
 		// Angel: 8c204c
-		this.props.loadActiveArtifact(this.props.id || "061951")
+		if (this.props.id){
+			this.props.loadActiveArtifact(this.props.id)
+		} else {
+			this.props.setActiveArtifact(TheBiddyBums)
+		}
 	}
 	componentDidMount(){
 		this.fetchArtifact()
 	}
 	render(){
 		return(
-			<div className="container" style={{maxWidth: "1200px"}}>
+			<div className="container" style={{maxWidth: "1200px", marginTop: "20px"}}>
 				{/* LoginModal is used to provide a way for the user to Login */}
 				<LoginModal />
 				{/* CoinbaseWrapper is used to provide a way for the user to purchase extra funds from Coinbase */}
@@ -48,8 +54,8 @@ class Album extends React.Component {
 				</div>
 
 				<div className="row">
-					<div className="col-12">
-						<AudioViewer />
+					<div className="col-12" style={{height: "400px"}}>
+						<FilePaymentWrapper />
 					</div>
 				</div>
 
@@ -64,8 +70,8 @@ class Album extends React.Component {
 }
 
 var mapDispatchToProps = {
-	loadActiveArtifact,
-	setActiveFile
+	setActiveArtifact,
+	loadActiveArtifact
 }
 
 export default connect(undefined, mapDispatchToProps)(Album);
