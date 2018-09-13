@@ -54,7 +54,7 @@ class Album extends React.Component {
 				</div>
 
 				<div className="row">
-					<div className="col-12" style={{height: "400px"}}>
+					<div className="col-12" style={{height: "400px", maxHeight: "400px"}}>
 						<FilePaymentWrapper />
 					</div>
 				</div>
