@@ -4,7 +4,10 @@ const config = require('../config')
 
 const app = express()
 
-app.use(express.static(__dirname + '/../config/dist'))
+if (config.url_basename !== "") // Has path
+	app.use(config.url_basename, express.static(__dirname + '/../config/dist'))
+else // No Path
+	app.use(express.static(__dirname + '/../config/dist'))
 
 app.get('*', (req, res) => res.sendFile(path.join(__dirname, '../config/dist/index.html')))
 
