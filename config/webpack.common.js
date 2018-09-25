@@ -4,6 +4,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const config = require('../config')
+
 module.exports = {
   entry: './src/app.js',
   plugins: [
@@ -16,7 +18,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: ""
+    publicPath: config.url_basename
   },
   module: {
     rules: [
