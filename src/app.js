@@ -18,6 +18,8 @@ import Album from './components/Album'
 // Import the Bootstrap 4 CSS
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import config from '../config.js'
+
 const store = createStore()
 
 class App extends Component {
@@ -32,7 +34,7 @@ class App extends Component {
 		// Biddy Bums: b4e6c9
 		// Angel: 8c204c
 		return(
-			<BrowserRouter>
+			<BrowserRouter basename={config.url_basename}>
 				<div>
 					<Route exact path="/" component={Homepage} />
 					<Route path="/movie" render={() => <ProviderWrapper component={Movie} id="d48f83" />} />
