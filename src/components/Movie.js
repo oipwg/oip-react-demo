@@ -5,7 +5,7 @@ import Linkify from 'react-linkify'
 
 import { AccountButton, LoginModal, FilePaymentWrapper, PosterWrapper, PaymentButton, CoinbaseWrapper, ArtifactTitle, ArtifactDescription } from 'oip-react'
 
-import { loadActiveArtifact, setActiveFile, fileToUID } from 'oip-state'
+import { loadActiveArtifact, setActiveArtifact, setActiveFile, fileToUID } from 'oip-state'
 
 class Movie extends Component {
 	constructor(props){
@@ -17,18 +17,28 @@ class Movie extends Component {
 	}
 	fetchArtifact(){
 		// CA: 21252c
-		// Agent: fca1d6
+		// paid Agent: fca1d6
+		// free Agent: 5533ce
 		// Sintel: d48f83
-		this.props.loadActiveArtifact(this.props.id || "d48f83", (artifact) => {
-			this.props.setActiveFile(artifact.getFiles()[1])
+		let success_callback = (artifact) => {
+			console.log(JSON.stringify(artifact.toJSON()))
+			if (this.props.trailerFile)
+				this.props.setActiveFile(artifact.getFiles()[this.props.trailerFile])
+
 			this.fileSet = true
-		})
+		}
+
+		if (this.props.artifact){
+			this.props.setActiveArtifact(this.props.artifact, success_callback)
+		} else {
+			this.props.loadActiveArtifact(this.props.id || "d48f83", success_callback)
+		}
 	}
 	componentDidMount(){
 		this.fetchArtifact()
 	}
 	render(){
-		let artifact_description, paid_file_uid, paid_file_state, lockVideo = false
+		let artifact_description, paid_file_uid
 
 		if (this.props.ActiveArtifact){
 			artifact_description = this.props.ActiveArtifact.getDescription()
@@ -45,12 +55,12 @@ class Movie extends Component {
 			// ------------------------------------------
 
 
-			paid_file_uid = fileToUID(this.props.ActiveArtifact.getFiles()[0])
+			let paid_file_num = 1
+			
+			if (this.props.mainFile !== undefined)
+				paid_file_num = this.props.mainFile
 
-			if (this.props.ActiveArtifactFile && this.fileSet){
-				if (this.props.ActiveArtifactFile.isPaid && !this.props.ActiveArtifactFile.owned && !this.props.ActiveArtifactFile.hasPaid)
-					lockVideo = true
-			}
+			paid_file_uid = fileToUID(this.props.ActiveArtifact.getFiles()[paid_file_num])
 		}
 		
 		return(
@@ -109,7 +119,8 @@ class Movie extends Component {
 
 const mapDispatchToProps = {
     loadActiveArtifact,
-    setActiveFile
+    setActiveFile,
+    setActiveArtifact
 };
 
 function mapStateToProps(state) {

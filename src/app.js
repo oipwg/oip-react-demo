@@ -20,6 +20,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import config from '../config.js'
 
+import { FreeSintel } from './assets/test_artifacts' 
+
 const store = createStore()
 
 class App extends Component {
@@ -37,8 +39,8 @@ class App extends Component {
 			<BrowserRouter basename={config.url_basename}>
 				<div>
 					<Route exact path="/" component={Homepage} />
-					<Route path="/movie" render={() => <ProviderWrapper component={Movie} id="d48f83" />} />
-					<Route path="/free-movie" render={() => <ProviderWrapper component={Movie} id="fca1d6" />} />
+					<Route path="/movie" render={() => <ProviderWrapper component={Movie} id="d48f83" trailerFile={1} mainFile={0} />} />
+					<Route path="/free-movie" render={() => <ProviderWrapper component={Movie} artifact={FreeSintel} trailerFile={1} mainFile={0} />} />
 					<Route path="/album" render={() => <ProviderWrapper component={Album} />} />
 					<Route path="/free-album" render={() => <ProviderWrapper component={Album} id="061951" />} />
 				</div>
