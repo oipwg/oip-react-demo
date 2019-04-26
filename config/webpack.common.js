@@ -4,6 +4,8 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const config = require('../config')
+
 module.exports = {
   entry: './src/app.js',
   plugins: [
@@ -16,13 +18,14 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: "/"
+    publicPath: config.url_basename
   },
   module: {
     rules: [
       {
         test: /.js?$/,
         loader: require.resolve('babel-loader'),
+        exclude: /node_modules/,
         query: {
           presets: ['@babel/env', '@babel/react'],
           cacheDirectory: true
@@ -31,6 +34,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: [ 'style-loader', 'css-loader' ]
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.(png|jpg|gif|ttf|woff|woff2|eot|svg)$/,
